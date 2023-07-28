@@ -80,6 +80,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -197,7 +199,59 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Context\Account.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Category.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Customer.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\dbModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\dbModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\dbModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Employee.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Invoice.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Order.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\OrderDetail.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Product.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\ProductTag.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Supplier.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\sysdiagram.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Tag.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -205,6 +259,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -306,19 +361,76 @@
     <Content Include="Content\images\banners\slide2.jpg" />
     <Content Include="Content\images\banners\slide3.jpg" />
     <Content Include="Content\images\favicon.ico" />
+    <Content Include="Content\images\fptshop.png" />
+    <Content Include="Content\images\gearvn.png" />
+    <Content Include="Content\images\hacom.png" />
+    <Content Include="Content\images\icons\flags\AU%402x.png" />
+    <Content Include="Content\images\icons\flags\AU.png" />
+    <Content Include="Content\images\icons\flags\CN%402x.png" />
+    <Content Include="Content\images\icons\flags\CN.png" />
+    <Content Include="Content\images\icons\flags\DE%402x.png" />
+    <Content Include="Content\images\icons\flags\DE.png" />
+    <Content Include="Content\images\icons\flags\GB%402x.png" />
+    <Content Include="Content\images\icons\flags\GB.png" />
+    <Content Include="Content\images\icons\flags\IN%402x.png" />
+    <Content Include="Content\images\icons\flags\IN.png" />
+    <Content Include="Content\images\icons\flags\RU%402x.png" />
+    <Content Include="Content\images\icons\flags\RU.png" />
+    <Content Include="Content\images\icons\flags\TR%402x.png" />
+    <Content Include="Content\images\icons\flags\TR.png" />
+    <Content Include="Content\images\icons\flags\US%402x.png" />
+    <Content Include="Content\images\icons\flags\US.png" />
+    <Content Include="Content\images\icons\flags\UZ%402x.png" />
+    <Content Include="Content\images\icons\flags\UZ.png" />
+    <Content Include="Content\images\icons\pay-american-ex.png" />
+    <Content Include="Content\images\icons\pay-bank.png" />
+    <Content Include="Content\images\icons\pay-mastercard.png" />
+    <Content Include="Content\images\icons\pay-visa-el.png" />
+    <Content Include="Content\images\icons\pay-visa.png" />
+    <Content Include="Content\images\items\1.jpg" />
+    <Content Include="Content\images\items\10.jpg" />
+    <Content Include="Content\images\items\11.jpg" />
+    <Content Include="Content\images\items\12.jpg" />
+    <Content Include="Content\images\items\13.jpg" />
+    <Content Include="Content\images\items\14.jpg" />
+    <Content Include="Content\images\items\15-1.jpg" />
+    <Content Include="Content\images\items\15-2.jpg" />
+    <Content Include="Content\images\items\15.jpg" />
+    <Content Include="Content\images\items\2.jpg" />
+    <Content Include="Content\images\items\3.jpg" />
+    <Content Include="Content\images\items\4.jpg" />
+    <Content Include="Content\images\items\5.jpg" />
+    <Content Include="Content\images\items\6.jpg" />
+    <Content Include="Content\images\items\7.jpg" />
+    <Content Include="Content\images\items\8.jpg" />
+    <Content Include="Content\images\items\9.jpg" />
     <Content Include="Content\images\logo-white.png" />
     <Content Include="Content\images\logo-whitecu.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\logo.svg" />
     <Content Include="Content\images\logocu.png" />
     <Content Include="Content\images\logocu.svg" />
+    <Content Include="Content\images\misc\appstore.png" />
+    <Content Include="Content\images\misc\payments.png" />
+    <Content Include="Content\images\misc\playmarket.png" />
     <Content Include="Content\images\posts\1.jpg" />
     <Content Include="Content\images\posts\2.jpg" />
     <Content Include="Content\images\posts\3.jpg" />
     <Content Include="Content\images\posts\4.jpg" />
+    <Content Include="Content\images\xgear.png" />
     <Content Include="Content\js\bootstrap.bundle.min.js" />
     <Content Include="Content\js\jquery-2.0.0.min.js" />
     <Content Include="Content\js\script.js" />
+    <Content Include="Context\dbModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbModel.edmx</DependentUpon>
+      <LastGenOutput>dbModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Context\dbModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbModel.edmx</DependentUpon>
+      <LastGenOutput>dbModel.cs</LastGenOutput>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -481,6 +593,14 @@
     <Content Include="Content\admin\dist\js\.eslintrc.json" />
     <Content Include="Content\admin\dist\js\adminlte.js.map" />
     <Content Include="Content\admin\dist\js\adminlte.min.js.map" />
+    <EntityDeploy Include="Context\dbModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Context\dbModel.edmx.diagram">
+      <DependentUpon>dbModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\images\.DS_Store" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -528,14 +648,12 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Content\admin\plugins\" />
-    <Folder Include="Content\images\icons\" />
-    <Folder Include="Content\images\items\" />
-    <Folder Include="Content\images\misc\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -544,6 +662,9 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

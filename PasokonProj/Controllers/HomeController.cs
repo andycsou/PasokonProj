@@ -3,14 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PasokonProj.Context;
+using PasokonProj.Models;
 
 namespace PasokonProj.Controllers
 {
     public class HomeController : Controller
     {
+        PasokonEntities objPasokonEntities = new PasokonEntities();
         public ActionResult Index()
         {
-            return View();
+            HomeModel objHomeModel = new HomeModel();
+            objHomeModel.ListCategory = objPasokonEntities.Categories.ToList();
+            objHomeModel.ListProduct = objPasokonEntities.Products.ToList();
+            objHomeModel.ListTag = objPasokonEntities.Tags.ToList();
+            objHomeModel.ListProductTag = objPasokonEntities.ProductTags.ToList();
+            objHomeModel.ListSupplier = objPasokonEntities.Suppliers.ToList();
+            return View(objHomeModel);
         }
 
         public ActionResult About()
